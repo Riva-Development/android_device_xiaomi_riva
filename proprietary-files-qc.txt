@@ -144,9 +144,9 @@ etc/dpm/dpm.conf
 etc/init/dpmd.rc
 etc/permissions/com.qti.dpmframework.xml
 etc/permissions/dpmapi.xml
-framework/com.qti.dpmframework.jar
-framework/dpmapi.jar
-framework/tcmclient.jar
+-framework/com.qti.dpmframework.jar
+-framework/dpmapi.jar
+-framework/tcmclient.jar
 lib64/com.qualcomm.qti.dpm.api@1.0.so
 lib64/libdpmctmgr.so
 lib64/libdpmfdmgr.so
@@ -196,6 +196,7 @@ vendor/lib/hw/gatekeeper.msm8937.so
 vendor/lib64/hw/gatekeeper.msm8937.so
 
 # GPS - from daisy - PKQ1.180917.001 V10.0.1.0.PDLMIFJ
+-framework/com.qti.location.sdk.jar
 vendor/bin/hw/vendor.qti.gnss@1.0-service
 vendor/bin/loc_launcher
 vendor/bin/lowi-server
@@ -364,7 +365,7 @@ vendor/lib/libI420colorconvert.so
 vendor/lib/libAlacSwDec.so
 vendor/lib/libApeSwDec.so
 vendor/lib/libFlacSwDec.so
-vendor/lib/libMpeg4SwEncoder.so
+-vendor/lib/libMpeg4SwEncoder.so
 vendor/lib/libmmosal_proprietary.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAlacDec.so
