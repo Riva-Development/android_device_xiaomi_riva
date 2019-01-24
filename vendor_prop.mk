@@ -89,8 +89,7 @@ vendor.display.disable_skip_validate=1 \
 debug.sdm.support_writeback=0 \
 debug.hwui.use_buffer_age=false \
 vendor.display.perf_hint_window=50 \
-persist.graphics.vulkan.disable=true \
-debug.composition.type=gpu
+persist.graphics.vulkan.disable=true
 
 # Property to enable display default color mode
 PRODUCT_PROPERTY_OVERRIDES += \
