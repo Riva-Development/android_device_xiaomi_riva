@@ -1,6 +1,10 @@
 # Bluetooth
 /(vendor|system/vendor)/bin/hci_qcomm_init	u:object_r:bluetooth_loader_exec:s0
 
+# DRM HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service\.widevine      u:object_r:hal_drm_widevine_exec:s0
+
+
 # Init
 /(vendor|system/vendor)/bin/init\.qcom\.graphics\.sh                u:object_r:init_graphics_exec:s0
 
