@@ -14,7 +14,7 @@
         <version>4.0</version>
         <interface>
             <name>IEffectsFactory</name>
-            <instance>default</instance>
+            <instance>msd</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -27,12 +27,21 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.bluetooth.a2dp</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IBluetoothAudioOffload</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.camera.provider</name>
         <transport>hwbinder</transport>
         <version>2.4</version>
         <interface>
             <name>ICameraProvider</name>
-            <instance>legacy/0</instance>
+            <instance>external/0</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -50,6 +59,15 @@
         <version>1.1</version>
         <interface>
             <name>ISurfaceFlingerConfigs</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.contexthub</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IContextHub</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -72,7 +90,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.gatekeeper</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
         <interface>
             <name>IGatekeeper</name>
@@ -82,12 +100,12 @@
     <hal format="hidl">
         <name>android.hardware.gnss</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1.1</version>
         <interface>
             <name>IGnss</name>
             <instance>default</instance>
         </interface>
-        <fqname>@1.0::IGnss/gnss_vendor</fqname>
+        <fqname>@1.1::IGnss/gnss_vendor</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
@@ -136,7 +154,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.keymaster</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <version>3.0</version>
         <interface>
             <name>IKeymasterDevice</name>
@@ -171,6 +189,15 @@
         <version>1.0</version>
         <interface>
             <name>IMemtrack</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.oemlock</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IOemLock</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -268,6 +295,15 @@
         <version>1.0</version>
         <interface>
             <name>IUsb</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.usb.gadget</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IUsbGadget</name>
             <instance>default</instance>
         </interface>
     </hal>
