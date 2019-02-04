@@ -18,11 +18,31 @@
 #define ANDROID_HARDWARE_LIGHT_V2_0_LIGHT_H
 
 #include <android/hardware/light/2.0/ILight.h>
+#include <hardware/lights.h>
 #include <hidl/Status.h>
-
-#include <fstream>
+#include <map>
 #include <mutex>
-#include <unordered_map>
+#include <vector>
+
+using ::android::hardware::Return;
+using ::android::hardware::Void;
+using ::android::hardware::light::V2_0::Flash;
+using ::android::hardware::light::V2_0::ILight;
+using ::android::hardware::light::V2_0::LightState;
+using ::android::hardware::light::V2_0::Status;
+using ::android::hardware::light::V2_0::Type;
+
+typedef void (*LightStateHandler)(const LightState&);
+
+struct LightBackend {
+    Type type;
+    LightState state;
+    LightStateHandler handler;
+
+    LightBackend(Type type, LightStateHandler handler) : type(type), handler(handler) {
+        this->state.color = 0xff000000;
+    }
+};
 
 namespace android {
 namespace hardware {
@@ -30,41 +50,13 @@ namespace light {
 namespace V2_0 {
 namespace implementation {
 
-struct Light : public ILight {
-    Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
-          std::ofstream&& red_led, std::ofstream&& green_led, std::ofstream&& blue_led,
-          std::ofstream&& red_blink, std::ofstream&& green_blink, std::ofstream&& blue_blink,
-          std::ofstream&& red_led_time, std::ofstream&& green_led_time, std::ofstream&& blue_led_time);
-
-    // Methods from ::android::hardware::light::V2_0::ILight follow.
+class Light : public ILight {
+  public:
     Return<Status> setLight(Type type, const LightState& state) override;
     Return<void> getSupportedTypes(getSupportedTypes_cb _hidl_cb) override;
 
   private:
-    void setAttentionLight(const LightState& state);
-    void setBatteryLight(const LightState& state);
-    void setLcdBacklight(const LightState& state);
-    void setNotificationLight(const LightState& state);
-    void setSpeakerBatteryLightLocked();
-    void setSpeakerLightLocked(const LightState& state);
-
-    std::pair<std::ofstream, uint32_t> mLcdBacklight;
-    std::ofstream mRedLed;
-    std::ofstream mGreenLed;
-    std::ofstream mBlueLed;
-    std::ofstream mRedBlink;
-    std::ofstream mGreenBlink;
-    std::ofstream mBlueBlink;
-    std::ofstream mRedLedTime;
-    std::ofstream mGreenLedTime;
-    std::ofstream mBlueLedTime;
-
-    LightState mAttentionState;
-    LightState mBatteryState;
-    LightState mNotificationState;
-
-    std::unordered_map<Type, std::function<void(const LightState&)>> mLights;
-    std::mutex mLock;
+    std::mutex globalLock;
 };
 
 }  // namespace implementation
