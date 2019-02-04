@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.light@2.0-service.xiaomi_riva"
+#define LOG_TAG "android.hardware.light@2.0-service.xiaomi_rolex"
 
 #include <hidl/HidlTransportSupport.h>
 
