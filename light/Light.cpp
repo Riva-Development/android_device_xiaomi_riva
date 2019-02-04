@@ -55,24 +55,14 @@ static void set(std::string path, int value) {
 }
 
 static uint32_t getBrightness(const LightState& state) {
-    uint32_t alpha, red, green, blue;
+    uint32_t red, green, blue;
 
     /*
-     * Extract brightness from AARRGGBB.
+     * Extract brightness from RRGGBB.
      */
-    alpha = (state.color >> 24) & 0xFF;
     red = (state.color >> 16) & 0xFF;
     green = (state.color >> 8) & 0xFF;
     blue = state.color & 0xFF;
-
-    /*
-     * Scale RGB brightness if Alpha brightness is not 0xFF.
-     */
-    if (alpha != 0xFF) {
-        red = red * alpha / 0xFF;
-        green = green * alpha / 0xFF;
-        blue = blue * alpha / 0xFF;
-    }
 
     return (77 * red + 150 * green + 29 * blue) >> 8;
 }
@@ -92,20 +82,11 @@ static void handleBacklight(const LightState& state) {
 
 static void handleNotification(const LightState& state) {
     int blink, onMs, offMs, red, green, blue;
-    uint32_t alpha;
 
-    // Extract brightness from AARRGGBB
-    alpha = (state.color >> 24) & 0xff;
+    // Retrieve each of the RGB colors
     red = (state.color >> 16) & 0xff;
     green = (state.color >> 8) & 0xff;
     blue = state.color & 0xff;
-
-    // Scale RGB brightness if Alpha brightness is not 0xFF
-    if (alpha != 0xff) {
-        red = (red * alpha) / 0xff;
-        green = (green * alpha) / 0xff;
-        blue = (blue * alpha) / 0xff;
-    }
 
     switch (state.flashMode) {
         case Flash::TIMED:
@@ -143,17 +124,12 @@ static void handleNotification(const LightState& state) {
     /* Enable blinking */
     if (blink){
         if (red)
-            set(RED_LED BLINK, blink);
+            set(RED_LED BLINK, 1);
         if (green)
-            set(GREEN_LED BLINK, blink);
+            set(GREEN_LED BLINK, 1);
         if (blue)
-            set(BLUE_LED BLINK, blink);
+            set(BLUE_LED BLINK, 1);
     } else {
-        if (red == 0 && green == 0 && blue == 0) {
-            set(RED_LED BLINK, 0);
-            set(GREEN_LED BLINK, 0);
-            set(BLUE_LED BLINK, 0);
-        }
         set(RED_LED BRIGHTNESS, red);
         set(GREEN_LED BRIGHTNESS, green);
         set(BLUE_LED BRIGHTNESS, blue);
