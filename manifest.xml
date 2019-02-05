@@ -1,7 +1,7 @@
 <manifest version="1.0" type="device" target-level="2">
     <hal format="hidl">
         <name>android.hardware.audio</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <version>4.0</version>
         <interface>
             <name>IDevicesFactory</name>
@@ -29,7 +29,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.bluetooth.a2dp</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
         <interface>
             <name>IBluetoothAudioOffload</name>
@@ -38,11 +38,12 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <version>2.4</version>
         <interface>
             <name>ICameraProvider</name>
             <instance>external/0</instance>
+            <instance>legacy/0</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -156,7 +157,7 @@
     <hal format="hidl">
         <name>android.hardware.keymaster</name>
         <transport arch="32+64">passthrough</transport>
-        <version>3.0</version>
+        <version>4.0</version>
         <interface>
             <name>IKeymasterDevice</name>
             <instance>default</instance>
@@ -301,7 +302,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.usb.gadget</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
         <interface>
             <name>IUsbGadget</name>
